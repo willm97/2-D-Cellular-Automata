@@ -14,6 +14,7 @@ public class Grid
 	 */
 	public Grid(int dimX, int dimY, String type)
 	{
+        System.out.println("New Grid for test");
 		this(new int[dimX][dimY], type);
 		// DEFAULT GRID SET UPS
 		// Test requires no default set up.
