@@ -20,6 +20,8 @@ public class Box
 	private int width;
 	private int height;
 	private int cellDim;
+    
+    private final int WINDOW_MARGIN = 20;
 	/**
 	 *  Creates a new Box.
 	 */
@@ -48,9 +50,16 @@ public class Box
 		case "wire":
 			maxState = 4;
 			cellDim = 4;
+            break;
         case "rule90":
             maxState = 2;
             cellDim = 4;
+            break;
+        default:
+            System.out.println("Type not found in Box!");
+            maxState = 0;
+            cellDim = 4;
+            break;
 		}
         if (place == null)
         {
@@ -70,7 +79,7 @@ public class Box
 		view.pack();
 		view.setVisible(true);
 		// The 20 is for the header of the window.
-		view.setSize(cellDim * width, 20 + cellDim * height);
+		view.setSize(cellDim * width, WINDOW_MARGIN + cellDim * height);
 	}
 	/**
 	 *  Returns the Grid under this Box.
@@ -86,7 +95,7 @@ public class Box
 	{
 		place.tick();
 		view.repaint(waitTime, 0, 0, 
-			width * cellDim, 20 + height * cellDim);
+			width * cellDim, WINDOW_MARGIN + height * cellDim);
 		try
 		{
 			Thread.currentThread().sleep(waitTime);

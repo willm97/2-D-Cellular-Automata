@@ -1,0 +1,11 @@
+I will use this plan as a loose guide for improving the project.
+
+My immediate goal is extensibility. I want to be able to have new automata added with a small class that defines their states and rules. (basically, the engine class with additional information about states). This isn't that hard in the scheme of how the program looks currently.
+
+In support of that, I have the following two aims:
+- Introduce an Automata class and apply it to the existing code. There are a few switch statements and catch-alls that show a need for a dictionary between types and information about them, which the Automata class can hold.
+- Rework the Control class, or replace it entirely, with a better parser, at Wade's suggestions.
+
+After that, it might be cool to try and implement all 2-D automata on two states based on their enumeration, which I believe is a standard somewhere. And then maybe just clean up the code by improving encapsulation.
+
+Anything else would be a long-term goal: interactivity, infinite grids, RLE files for saving, etc.

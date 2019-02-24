@@ -14,7 +14,6 @@ public class Grid
 	 */
 	public Grid(int dimX, int dimY, String type)
 	{
-        System.out.println("New Grid for test");
 		this(new int[dimX][dimY], type);
 		// DEFAULT GRID SET UPS
 		// Test requires no default set up.
@@ -139,7 +138,7 @@ public class Grid
             return new Rule90Engine(1);
 		case "traffic":
 			System.out.println("In Dev!");
-		break;
+            break;
 		default:
 			System.out.println("Not a valid automata!");
 		}

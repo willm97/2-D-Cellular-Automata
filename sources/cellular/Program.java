@@ -19,8 +19,8 @@ import java.util.Scanner;
 public class Program
 {
 	private String name;
+    private String type;
 	private final long WAIT_TIME = 50;
-	private String type;
 	private final FilingCabinet gridFiler = new FilingCabinet("saves/");
 	private Map<String, Box> city;
 	/**

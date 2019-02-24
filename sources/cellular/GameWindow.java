@@ -11,7 +11,7 @@ import java.io.IOException;
 public class GameWindow extends JPanel
 {
 	private Grid block;
-	private FilingCabinet imager;
+	private final FilingCabinet imager;
 	private int cellDim;
 	private int maxState;
 	private BufferedImage[] pictures;
@@ -26,7 +26,7 @@ public class GameWindow extends JPanel
 		this.cellDim = cellDim;
 		imager = new FilingCabinet("resources/" + type + "/cells/");
 		pictures = new BufferedImage[maxState];
-		for (int i = 0; i < maxState; i++)
+		for (int i = 0; i < pictures.length; i++)
 		{
 			pictures[i] = createImageFromFile("cell" + i + ".png");
 		}
@@ -49,7 +49,7 @@ public class GameWindow extends JPanel
 		}
 	}
 	/**
-	 *  Creates a BufferedImage from a file name.
+	 *  Creates a BufferedImage object from a file name.
 	 */
 	private BufferedImage createImageFromFile(String filename)
 	{
