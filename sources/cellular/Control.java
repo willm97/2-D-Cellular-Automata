@@ -8,9 +8,11 @@ import java.util.HashMap;
 public class Control
 {
 	private static Map<String, Program> programs;
+    private static AutomataLoader typeLoader;
 	public static void main()
 	{
 		programs = new HashMap<String, Program>();
+        typeLoader = new AutomataLoader();
 		FilingCabinet filer = new FilingCabinet("text/");
 		filer.printFile("welcome.txt");
 		String[] commands = new String[10];
@@ -38,7 +40,7 @@ public class Control
 			{
 				continue;
 			}
-			// Interpret the commands into action
+			// Parse the commands -- should be better
 			if (commands[0].equals("createBox"))
 			{
 				if (index < 4)
@@ -108,20 +110,14 @@ public class Control
 			}
 		}
 		filer.printFile("exit.txt");
-		System.exit(0);
 	}
 	/**
 	 *  Creates a new program and adds it to the list.
 	 */
 	public static void createProgram(String[] input)
 	{
-        // I got to find a better way to manage the IO for a lot
-        // of different versions of these.
-		if (!(input[2].equals("life")
-			|| input[2].equals("ant")
-			|| input[2].equals("test")
-			|| input[2].equals("wire")
-            || input[2].equals("rule90")) )
+        // AutomataLoader is a bit better!
+		if (!typeLoader.hasAutomata(input[2]))
 		{
 			System.out.println("No automata of that type!");
 		}
@@ -129,8 +125,9 @@ public class Control
 		{
 			if (!programs.containsKey(input[1]))
 			{
-				Program p = new Program(input[1], input[2]);
-				programs.put(input[1], p);
+                Program prgm = new Program(input[1], 
+                    typeLoader.getAutomata(input[2]));
+				programs.put(input[1], prgm);
 			}
 			else
 			{
@@ -167,7 +164,8 @@ public class Control
 	{
 		if (programs.containsKey(input[1]))
 		{
-			programs.get(input[1]).run(input[2], Integer.parseInt(input[3]));
+			programs.get(input[1]).run(input[2], 
+                Integer.parseInt(input[3]));
 		}
 		else
 		{

@@ -22,10 +22,6 @@ public class Automata
         this.cellDim = cellDim;
     }
     /**
-     *  Makes a new Automata spec, with a blank default grid.
-     */ 
-    // No setters, just make a new one if that's necessary.
-    /**
      *  Gets the name (type) of this Automata.
      */
     public String getName()
@@ -48,4 +44,5 @@ public class Automata
     {
         return this.cellDim;
     }
+    // No setters, just make a new one if that's necessary.
 }

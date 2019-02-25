@@ -19,14 +19,14 @@ import java.util.Scanner;
 public class Program
 {
 	private String name;
-    private String type;
+    private Automata type;
 	private final long WAIT_TIME = 50;
 	private final FilingCabinet gridFiler = new FilingCabinet("saves/");
 	private Map<String, Box> city;
 	/**
 	 *  Creates a Program with a given name.
 	 */
-	public Program(String name, String type)
+	public Program(String name, Automata type)
 	{
 		this.name = name;
 		this.type = type;
@@ -58,14 +58,15 @@ public class Program
 		city.put(newName, b);
 	}
 	/**
-	 *  Creates a blank Box for this program, having specific dimensions.
+	 *  Creates a default Box for this program, having specific 
+     *  dimensions.
 	 */
 	public void addBox(String name, int X, int Y)
 	{
         this.addBox(name, X, Y, null);
 	}
     /**
-	 *  Creates a Box from a file and adds it to the field.
+	 *  Creates a Box from a file and adds it to the list.
 	 */
 	public void addBox(String boxName)
 	{
@@ -79,11 +80,11 @@ public class Program
     {
         if (!city.containsKey(name))
 		{
-			city.put(name, new Box(name, X, Y, type, cells, WAIT_TIME));
+			city.put(name, new Box(name, type, X, Y, cells, WAIT_TIME));
 		}
 		else
 		{
-			System.out.println("That Box name is taken!");	
+			System.out.println("That Box name is taken!");
 		}
     }
 	/**
@@ -137,13 +138,14 @@ public class Program
 		
 			// Writing
 			// Header
-			this.append(writer, "Type=" + type + "\n");
+			this.append(writer, "Type=" + type.getName() + "\n");
 			this.append(writer, "X=" + 
 				Integer.toString(input.getDimX()) + "\n");
 			this.append(writer, "Y=" + 
 				Integer.toString(input.getDimY()) + "\n");
 			// Data of grid values in Grid as numbers.
-			// Consider using an array to store values if this is too slow?
+			// Consider using an array to store values if this is too 
+            // slow?
 			for (int y = 0; y < input.getDimY(); y++)
 			{
 				for (int x = 0; x < input.getDimX(); x++)
@@ -198,11 +200,12 @@ public class Program
 		}
 	}
 	/**
-	 *  Loads and returns Grid from a String boxName.
+	 *  Loads and returns a Grid from a String boxName.
 	 */
 	public Grid loadFromFile(String boxName)
 	{
         Grid target = null;
+        AutomataLoader typeLoader = new AutomataLoader();
 		if (city.containsKey(boxName))
 		{
 			System.out.println("Box name already in use!");
@@ -229,7 +232,7 @@ public class Program
 
 			// Data of grid values in Grid as numbers
             // Again, scanner calls could be improved with nextLine().
-            // Or ByteStream IO...
+            // Or StreamIO objects...
 			int[][] cellValues = new int[dimX][dimY];
 			for (int y = 0; y < dimY; y++)
 			{
@@ -240,7 +243,8 @@ public class Program
 			}
             reader.close();
             // Generate the Grid and return
-            target = new Grid(cellValues, gridType);
+            target = new Grid(cellValues, 
+            typeLoader.getAutomata(gridType));
 		}
         return target;
 	}

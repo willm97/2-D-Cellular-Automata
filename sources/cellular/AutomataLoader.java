@@ -12,13 +12,18 @@ import java.util.HashMap;
 public class AutomataLoader
 {
     private Map<String, Automata> myAutomatas;
-    /**
-     *  Manually defines and inserts all automata. The good part about 
-     *  this class is that it encapsulates this. It could read a file.
-     */ 
-    public void build()
+    
+    public AutomataLoader()
     {
         myAutomatas = new HashMap<String, Automata>();
+        this.manualLoad();
+    }
+    
+    /**
+     *  Manually defines and inserts all automata. The good part.
+     */ 
+    public void manualLoad()
+    {
         // Each Automata I want to add hardcoded in
         myAutomatas.put("ant", new Automata("ant", 10, 8));
         myAutomatas.put("life", new Automata("life", 2, 4));
@@ -27,6 +32,9 @@ public class AutomataLoader
         myAutomatas.put("wire", new Automata("wire", 4, 4));
     }
     
+    /**
+     *  Checks if the given name matches a known automata.
+     */ 
     public boolean hasAutomata(String name)
     {
         return myAutomatas.containsKey(name);

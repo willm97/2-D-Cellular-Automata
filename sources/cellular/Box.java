@@ -12,26 +12,30 @@ import java.util.TimerTask;
 
 public class Box
 {
-	private String name;
 	private JFrame view;
 	private Grid place;
 	private GameWindow game;
-	private long waitTime;
+    private String name;
+    private Automata type;
 	private int width;
 	private int height;
-	private int cellDim;
+    private long waitTime;
+    private final int WINDOW_X;
+    private final int WINDOW_Y;
     
     private final int WINDOW_MARGIN = 20;
 	/**
 	 *  Creates a new Box.
 	 */
-	public Box(String name, int width, int height, String type, 
+	public Box(String name, Automata type, int width, int height, 
         Grid place, long waitTime)
 	{
-		this.name = name;
+        this.name = name;
+		this.type = type;
 		this.width = width;
 		this.height = height;
 		this.waitTime = waitTime;
+        /*
 		int maxState = 0;
 		switch (type)
 		{
@@ -61,6 +65,7 @@ public class Box
             cellDim = 4;
             break;
 		}
+        */
         if (place == null)
         {
             this.place = new Grid(width, height, type);
@@ -73,13 +78,15 @@ public class Box
 		// The following closes all the windows together...
 		view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Adding the game panel
-		game = new GameWindow(this.place, maxState, cellDim, type);
+		game = new GameWindow(this.place, type);
 		view.add(game);
 		// Painting and revealing.
 		view.pack();
 		view.setVisible(true);
 		// The 20 is for the header of the window.
-		view.setSize(cellDim * width, WINDOW_MARGIN + cellDim * height);
+        this.WINDOW_X = type.getCellDim() * width;
+        this.WINDOW_Y = type.getCellDim() * height + WINDOW_MARGIN;
+		view.setSize(WINDOW_X, WINDOW_Y);
 	}
 	/**
 	 *  Returns the Grid under this Box.
@@ -90,12 +97,14 @@ public class Box
 	}
 	/**
 	 *  Ticks the automata and updates the display.
+     *  Note that any concurrency issues with running at speed or 
+     *  large computation come down to this method, as view has a 
+     *  distinct reference to place than this class.
 	 */
 	public void tick()
 	{
 		place.tick();
-		view.repaint(waitTime, 0, 0, 
-			width * cellDim, WINDOW_MARGIN + height * cellDim);
+		view.repaint(waitTime, 0, 0, WINDOW_X, WINDOW_Y);
 		try
 		{
 			Thread.currentThread().sleep(waitTime);

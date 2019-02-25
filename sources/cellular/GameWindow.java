@@ -12,20 +12,18 @@ public class GameWindow extends JPanel
 {
 	private Grid block;
 	private final FilingCabinet imager;
-	private int cellDim;
-	private int maxState;
+    private Automata type;
 	private BufferedImage[] pictures;
 	/**
 	 *  Creates a new GameWindow with a Grid to get data from.
 	 */
-	public GameWindow(Grid place, int maxState, int cellDim, String type)
+	public GameWindow(Grid place, Automata type)
 	{
-		this.maxState = maxState;
-		this.cellDim = cellDim;
+		this.type = type;
 		block = place;
-		this.cellDim = cellDim;
-		imager = new FilingCabinet("resources/" + type + "/cells/");
-		pictures = new BufferedImage[maxState];
+		imager = new FilingCabinet("resources/" + type.getName()
+            + "/cells/");
+		pictures = new BufferedImage[type.getMaxState()];
 		for (int i = 0; i < pictures.length; i++)
 		{
 			pictures[i] = createImageFromFile("cell" + i + ".png");
@@ -43,8 +41,8 @@ public class GameWindow extends JPanel
 			for (int j = 0; j < block.getDimY(); j++)
 			{
 				int localState = block.getState(i, j);
-				g.drawImage(pictures[localState],
-					cellDim * i, cellDim * j, null);
+				g.drawImage(pictures[localState], 
+                    type.getCellDim() * i, type.getCellDim() * j, null);
 			}
 		}
 	}

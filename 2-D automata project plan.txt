@@ -9,3 +9,6 @@ In support of that, I have the following two aims:
 After that, it might be cool to try and implement all 2-D automata on two states based on their enumeration, which I believe is a standard somewhere. And then maybe just clean up the code by improving encapsulation.
 
 Anything else would be a long-term goal: interactivity, infinite grids, RLE files for saving, etc.
+
+Here's a Wolfram paper about 2-D automata that might be useful for some purpose, like using enumerations. It at least mentions them.
+https://www.stephenwolfram.com/publications/cellular-automata-complexity/pdfs/two-dimensional-cellular-automata.pdf
