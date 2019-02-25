@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import java.util.Map;
 import java.util.HashMap;
+
 public class Control
 {
 	private static Map<String, Program> programs;

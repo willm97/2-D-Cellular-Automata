@@ -161,6 +161,8 @@ public class Grid
 			}
 		}
 	}
+    // Everything below this line belongs in a different class.
+    // And a better class at that.
 	/**
 	 *  Calculates the next state for cells at the corners, edges, and center.
 	 */
