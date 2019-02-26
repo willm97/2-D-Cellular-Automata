@@ -1,2 +1,0 @@
-Main-Class: cellular.main
-Class-Path: Cells.jar

@@ -12,3 +12,15 @@ Anything else would be a long-term goal: interactivity, infinite grids, RLE file
 
 Here's a Wolfram paper about 2-D automata that might be useful for some purpose, like using enumerations. It at least mentions them.
 https://www.stephenwolfram.com/publications/cellular-automata-complexity/pdfs/two-dimensional-cellular-automata.pdf
+
+I'll implement rule 736 here soon I think - it's a variant of life (224?) and may be high life.
+rule 224 - Conway's Game of Life
+0 1 2 3 4 5 6 7 8 9 a b c d e f g h
+0 0 0 0 0 1 1 1 0 0 0 0 0 0 0 0 0 0
+
+Totalistic rule - even bits are for dead cells, odd bits for live cells, and the count increases with the number of bits. Probably not how I would have done it (I would have just reversed the order) but it seems legit enough.
+So rule 736 is 
+0 1 2 3 4 5 6 7 8 9 a b c d e f g h
+0 0 0 0 0 1 1 1 0 1 0 0 0 0 0 0 0 0
+
+Which means it's life, but it keeps a cell alive if it has four neighbors and is alive

@@ -14,7 +14,8 @@ public class AntEngine extends Engine
 	@Override
 	public void computeNextState(Cell[] neighbors)
 	{
-		// If the ant is coming into the cell, become the ant.
+		// Setup. Basically, states 0-4 are white and 5-9 are black, 
+        // while the other four are the ant looking different directions
 		int[] vals = new int[4];
 		vals[0] = 1; // 1
 		vals[1] = 3; // 3
@@ -26,6 +27,7 @@ public class AntEngine extends Engine
 				&& (neighbors[vals[i]].getState() == i + 1
 				|| neighbors[vals[i]].getState() == i + 6))
 			{
+                // If the ant is coming into the cell, become the ant.
 				if (neighbors[4].getState() / 5 == 0)
 				{
 					if (i == 0)

@@ -9,7 +9,7 @@ public class Control
 {
 	private static Map<String, Program> programs;
     private static AutomataLoader typeLoader;
-	public static void main()
+	public static void main(String[] args)
 	{
 		programs = new HashMap<String, Program>();
         typeLoader = new AutomataLoader();
@@ -110,6 +110,7 @@ public class Control
 			}
 		}
 		filer.printFile("exit.txt");
+        System.exit(0); // necessary to end concurrent threads
 	}
 	/**
 	 *  Creates a new program and adds it to the list.
