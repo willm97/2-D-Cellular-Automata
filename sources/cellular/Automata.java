@@ -10,16 +10,19 @@ public class Automata
     private String name;
     private int maxState;
     private int cellDim;
+    private Engine runner;
     // Default grids are a good idea, but I can just use saves later.
     // private Grid[] defaultGrids;
     /**
      *  Makes a new Automata spec with all parameters.
      */
-    public Automata(String name, int maxState, int cellDim)
+    public Automata(String name, int maxState, int cellDim, 
+        Engine runner)
     {
         this.name = name;
         this.maxState = maxState;
         this.cellDim = cellDim;
+        this.runner = runner;
     }
     /**
      *  Gets the name (type) of this Automata.
@@ -43,6 +46,14 @@ public class Automata
     public int getCellDim()
     {
         return this.cellDim;
+    }
+    
+    /**
+     *  Gets the Engine that determines this automata's rule.
+     */
+    public Engine getEngine()
+    {
+        return this.runner;
     }
     // No setters, just make a new one if that's necessary.
 }

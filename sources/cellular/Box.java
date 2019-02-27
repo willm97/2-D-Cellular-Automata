@@ -22,7 +22,7 @@ public class Box
     private long waitTime;
     private final int WINDOW_X;
     private final int WINDOW_Y;
-    
+    // The WINDOW_MARGIN is the height of the window above the 
     private final int WINDOW_MARGIN = 20;
 	/**
 	 *  Creates a new Box.
@@ -35,37 +35,6 @@ public class Box
 		this.width = width;
 		this.height = height;
 		this.waitTime = waitTime;
-        /*
-		int maxState = 0;
-		switch (type)
-		{
-		case "life":
-			maxState = 2;
-			cellDim = 4;
-			break;
-		case "ant":
-			maxState = 10;
-			cellDim = 8;
-			break;
-		case "test":
-			maxState = 12;
-			cellDim = 8;
-			break;
-		case "wire":
-			maxState = 4;
-			cellDim = 4;
-            break;
-        case "rule90":
-            maxState = 2;
-            cellDim = 4;
-            break;
-        default:
-            System.out.println("Type not found in Box!");
-            maxState = 0;
-            cellDim = 4;
-            break;
-		}
-        */
         if (place == null)
         {
             this.place = new Grid(width, height, type);
@@ -83,13 +52,12 @@ public class Box
 		// Painting and revealing.
 		view.pack();
 		view.setVisible(true);
-		// The 20 is for the header of the window.
         this.WINDOW_X = type.getCellDim() * width;
         this.WINDOW_Y = type.getCellDim() * height + WINDOW_MARGIN;
 		view.setSize(WINDOW_X, WINDOW_Y);
 	}
 	/**
-	 *  Returns the Grid under this Box.
+	 *  Returns the Grid controlled by this Box.
 	 */
 	public Grid getGrid()
 	{
@@ -99,7 +67,8 @@ public class Box
 	 *  Ticks the automata and updates the display.
      *  Note that any concurrency issues with running at speed or 
      *  large computation come down to this method, as view has a 
-     *  distinct reference to place than this class.
+     *  distinct reference to place than this class, in a different
+     *  thread!
 	 */
 	public void tick()
 	{
@@ -115,7 +84,7 @@ public class Box
 		}
 	}
 	/**
-	 *  Runs the Box.
+	 *  Runs the Box by the given number of gens.
 	 */
 	public void run(int gens)
 	{

@@ -2,9 +2,9 @@ package cellular;
 
 public class Rule90Engine extends Engine
 {
-	public Rule90Engine(int states)
+	public Rule90Engine()
 	{
-		super(states);
+		super(2);
 	}
 	/**
 	 *  Computes the next state of the Cell from the rule for this type.

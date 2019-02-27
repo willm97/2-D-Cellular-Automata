@@ -132,19 +132,18 @@ public class Grid
      */ 
 	public Engine createEngine(Automata type)
 	{
-        int param = type.getMaxState() - 1;
 		switch (type.getName())
 		{
 		case "test":
-			return new TestEngine(param);
+			return new TestEngine();
 		case "ant":
-			return new AntEngine(param);
+			return new AntEngine();
 		case "life":
-			return new LifeEngine(param);
+			return new LifeEngine();
 		case "wire":
-			return new WireEngine(param);
+			return new WireEngine();
         case "rule90":
-            return new Rule90Engine(param);
+            return new Rule90Engine();
 		case "traffic":
 			System.out.println("In Dev!");
             break;
@@ -185,7 +184,7 @@ public class Grid
 				{
 					for (int j = -1; j < 2; j++)
 					{
-                        if (x + i < 0 || y + j < 0 ||
+                        if (x + i < 0 || y + j < 0 || 
                             x + i >= tiles.length || 
                             y + j >= tiles[x].length)
                         {

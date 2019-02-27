@@ -25,11 +25,16 @@ public class AutomataLoader
     public void manualLoad()
     {
         // Each Automata I want to add hardcoded in
-        myAutomatas.put("ant", new Automata("ant", 10, 8));
-        myAutomatas.put("life", new Automata("life", 2, 4));
-        myAutomatas.put("rule90", new Automata("rule90", 2, 4));
-        myAutomatas.put("test", new Automata("test", 12, 8));
-        myAutomatas.put("wire", new Automata("wire", 4, 4));
+        myAutomatas.put("ant", new Automata(
+            "ant", 10, 8, new AntEngine()));
+        myAutomatas.put("life", new Automata(
+            "life", 2, 4, new LifeEngine()));
+        myAutomatas.put("rule90", new Automata(
+            "rule90", 2, 4, new Rule90Engine()));
+        myAutomatas.put("test", new Automata(
+            "test", 12, 8, new TestEngine()));
+        myAutomatas.put("wire", new Automata(
+            "wire", 4, 4, new WireEngine()));
     }
     
     /**
