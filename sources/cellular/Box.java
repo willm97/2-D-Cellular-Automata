@@ -14,13 +14,11 @@ public class Box
 {
 	private JFrame view;
 	private Grid place;
-	private PictureWindow disp;
-    private DrawWindow newDisp;
+	private JPanel disp;
     private String name;
     private Automata type;
 	private int width;
 	private int height;
-    private long waitTime;
     private final int windowX;
     private final int windowY;
     // The WINDOW_MARGIN is the height of the window above the content.
@@ -48,13 +46,9 @@ public class Box
 		// The following closes all the windows together...
 		view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Adding the display JPanel
-		disp = new PictureWindow(this.place, type);
-        newDisp = new DrawWindow(this.place, type);
-        
-        // DEBUG
-		view.add(newDisp);
-        
-        
+        // Currently using DrawWindow
+        disp = new DrawWindow(this.place, type);
+		view.add(disp);
 		// Painting and revealing.
 		view.pack();
 		view.setVisible(true);
@@ -76,7 +70,7 @@ public class Box
      *  distinct reference to place than this class, in a different
      *  thread!
 	 */
-	public void tick()
+	public void tick(int waitTime)
 	{
 		place.tick();
 		view.repaint(waitTime, 0, 0, windowX, windowY);
@@ -102,7 +96,7 @@ public class Box
 	/**
 	 *  Returns the PictureWindow extends JPanel under this Box.
 	 */
-	public PictureWindow getPictureWindow()
+	public PictureWindow getDisplayWindow()
 	{
 		return disp;
 	}

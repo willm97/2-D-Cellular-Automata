@@ -1,6 +1,12 @@
 Update March 3 2019
+I changed GameWindow to PictureWindow, deprecated it and made a DrawWindow that serves the same functions at a higher speed. It's made things much more extensible visually, but I wonder what it adds since I want to switch to a web version eventually.
 
+So I will probably work to make defaults for the different automata and to let Control read from a file as a crutch until I get a new parser.
 
+Long term:
+- JavaScript / HTML loading / display for the application
+- Infinite Grids? Sparse tree design instead of array grids?
+- Automata loader generates rules after loading from a file, or even at runtime
 
 Update March 1 2019
 I've introduced an Automata and AutomataLoader class that have substantially improved the simulation. Additionally, I solved my problem of working at the edges of the simulation by making the Grid class make sense.
@@ -13,7 +19,7 @@ Extensibility still isn't where I want it - I need at least three more classes g
 
 - I want to make a class that stores default Grid states for different automata, and add a field for it to the Automata class. Then mucking around with how things look to begin with would be simplified.
 
-If these classes were added, the program would only require Automata loader to know rules and the physical class for a new rule to be written. Theoretically, Automata loader
+If these classes were added, the program would only require Automata loader to know rules and the physical class for a new rule to be written. Theoretically, Automata loader could generate rules and be improved that way, but I'm unsure how to do that now.
 
 ---
 I will use this plan as a loose guide for improving the project.
