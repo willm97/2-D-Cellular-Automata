@@ -14,16 +14,17 @@ public class Box
 {
 	private JFrame view;
 	private Grid place;
-	private GameWindow game;
+	private PictureWindow disp;
+    private DrawWindow newDisp;
     private String name;
     private Automata type;
 	private int width;
 	private int height;
     private long waitTime;
-    private final int WINDOW_X;
-    private final int WINDOW_Y;
-    // The WINDOW_MARGIN is the height of the window above the 
-    private final int WINDOW_MARGIN = 20;
+    private final int windowX;
+    private final int windowY;
+    // The WINDOW_MARGIN is the height of the window above the content.
+    private static final int WINDOW_MARGIN = 22;
 	/**
 	 *  Creates a new Box.
 	 */
@@ -46,15 +47,20 @@ public class Box
 		view = new JFrame(name);
 		// The following closes all the windows together...
 		view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// Adding the game panel
-		game = new GameWindow(this.place, type);
-		view.add(game);
+		// Adding the display JPanel
+		disp = new PictureWindow(this.place, type);
+        newDisp = new DrawWindow(this.place, type);
+        
+        // DEBUG
+		view.add(newDisp);
+        
+        
 		// Painting and revealing.
 		view.pack();
 		view.setVisible(true);
-        this.WINDOW_X = type.getCellDim() * width;
-        this.WINDOW_Y = type.getCellDim() * height + WINDOW_MARGIN;
-		view.setSize(WINDOW_X, WINDOW_Y);
+        this.windowX = type.getCellDim() * width;
+        this.windowY = type.getCellDim() * height + WINDOW_MARGIN;
+		view.setSize(windowX, windowY);
 	}
 	/**
 	 *  Returns the Grid controlled by this Box.
@@ -73,7 +79,7 @@ public class Box
 	public void tick()
 	{
 		place.tick();
-		view.repaint(waitTime, 0, 0, WINDOW_X, WINDOW_Y);
+		view.repaint(waitTime, 0, 0, windowX, windowY);
 		try
 		{
 			Thread.currentThread().sleep(waitTime);
@@ -94,11 +100,11 @@ public class Box
 		}
 	}
 	/**
-	 *  Returns the GameWindow JPanel under this Box.
+	 *  Returns the PictureWindow extends JPanel under this Box.
 	 */
-	public GameWindow getGameWindow()
+	public PictureWindow getPictureWindow()
 	{
-		return game;
+		return disp;
 	}
 	/**
 	 *  Sets the name of the box, and updates the window title.

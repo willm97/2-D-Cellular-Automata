@@ -8,16 +8,16 @@ import javax.imageio.*;
 
 import java.io.IOException;
 
-public class GameWindow extends JPanel
+public class PictureWindow extends JPanel
 {
 	private Grid block;
 	private final FilingCabinet imager;
     private Automata type;
 	private BufferedImage[] pictures;
 	/**
-	 *  Creates a new GameWindow with a Grid to get data from.
+	 *  Creates a new PictureWindow with a Grid to get data from.
 	 */
-	public GameWindow(Grid place, Automata type)
+	public PictureWindow(Grid place, Automata type)
 	{
 		this.type = type;
 		block = place;

@@ -20,7 +20,7 @@ public class Program
 {
 	private String name;
     private Automata type;
-	private final long WAIT_TIME = 50;
+	private final long WAIT_TIME = 10;
 	private final FilingCabinet gridFiler = new FilingCabinet("saves/");
 	private Map<String, Box> city;
 	/**

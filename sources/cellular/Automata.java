@@ -12,7 +12,8 @@ public class Automata
     private int cellDim;
     private Engine runner;
     // Default grids are a good idea, but I can just use saves later.
-    // private Grid[] defaultGrids;
+    // That could replace the jargon in Grid.
+    
     /**
      *  Makes a new Automata spec with all parameters.
      */
@@ -24,6 +25,7 @@ public class Automata
         this.cellDim = cellDim;
         this.runner = runner;
     }
+    
     /**
      *  Gets the name (type) of this Automata.
      */

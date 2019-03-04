@@ -16,30 +16,44 @@ public class Grid
 	{
 		this(new int[dimX][dimY], type);
         String name = type.getName();
-        // The following should really be implemented with saves.
+        int midX = (dimX - dimX % 2) / 2;
+        int midY = (dimY - dimY % 2) / 2;
+        // The following should really be implemented with saves...
         
 		// DEFAULT GRID SET UPS
 		// Test requires no default set up
 		// DEBUG FOR LIFE
 		// A GLIDER.
+        /* */
 		if ("life".equals(name))
 		{
+            /* *
 			tiles[2][2] = new Cell(1);
 			tiles[3][3] = new Cell(1);
 			for (int i = 1; i < 4; i++)
 			{
 				tiles[i][4] = new Cell(1);
 			}
+            /* */
+            Random rand = new Random(System.currentTimeMillis());
+            for (int i = -19; i < 20; i++)
+            {
+                for (int j = -19; j < 20; j++)
+                {
+                    tiles[midX + i][midY + j].setState(rand.nextInt(2));
+                }
+            }
+            /* */
 		}
 		// DEBUG FOR LANGTON'S ANT
 		// THE ANT ALONE.
-		if ("ant".equals(name))
+		else /* */ if ("ant".equals(name))
 		{
 			tiles[dimX / 2][dimY / 2] = new Cell(4);
 		}
 		// DEBUG FOR WIRE WORLD
 		// A LOOPING WIRE
-		if ("wire".equals(name))
+		else if ("wire".equals(name))
 		{
 			for (int i = 0; i < 7; i++)
 			{
@@ -52,18 +66,45 @@ public class Grid
 			tiles[10][10].setState(1);
 			tiles[10][11].setState(1);
 		}
-        // DEBUG FOR RULE 90
-		// If I can, I'll do all of them later as any 1D automata
-        if ("rule90".equals(name))
+        // DEBUG FOR 1D RULES
+        else if ("rule30".equals(name) 
+                || "rule90".equals(name))
         {
-            // The one dot for a Sierpinski Triangle
-            //tiles[(dimX - dimX % 2) / 2][0].setState(1);
+            // One dot to test directionality.
+            //tiles[midX][midY].setState(1);
+            // One dot in middle top
+            // tiles[midX][0].setState(1);
+            // One dot in top right
+            // tiles[dimX - 1][0].setState(1);
             // Randomized first gen for any 1D automata
+            /* */
             Random rand = new Random(System.currentTimeMillis());
             for (int i = 0; i < dimX; i++)
             {
                 tiles[i][0] = new Cell(rand.nextInt(2));
             }
+            /* */
+        }
+        else if ("rule110".equals(name))
+        {
+            // One dot on far left
+            tiles[dimX - 1][0].setState(1);
+        }
+        else
+        {
+            // One dot for simple evolution
+            // tiles[midX][midY].setState(1);
+            /*  */
+            // randomize a central area
+            Random rand = new Random(System.currentTimeMillis());
+            for (int i = -2; i < 3; i++)
+            {
+                for (int j = -2; j < 3; j++)
+                {
+                    tiles[midX + i][midY + j].setState(rand.nextInt(2));
+                }
+            }
+            /* */
         }
 	}
     /**
@@ -132,33 +173,23 @@ public class Grid
      */ 
 	public Engine createEngine(Automata type)
 	{
-		switch (type.getName())
-		{
-		case "test":
-			return new TestEngine();
-		case "ant":
-			return new AntEngine();
-		case "life":
-			return new LifeEngine();
-		case "wire":
-			return new WireEngine();
-        case "rule90":
-            return new Rule90Engine();
-		case "traffic":
-			System.out.println("In Dev!");
-            break;
-		default:
-			System.out.println("No automata of type " + type.getName());
-		}
-		return null;
+        Engine runnable = type.getEngine();
+        if (runnable == null)
+        {
+            System.out.println("Engine for automata " + type.getName() +
+                " not found in Grid!");
+            return null;
+        }
+		return runnable;
 	}
 	/**
-	 *  Calculates the next state of the simulation and then changes to it.
+	 *  Calculates the next state of the simulation and then 
+     *  changes to it.
 	 */
 	public void tick()
 	{
 		generation++;
-		// Calculate the next state for each cell.      (!!)
+		// Calculate the next state for each cell.
 		cellNextStates();
 		// Switch to the next state.
 		for (int i = 0; i < tiles.length; i++)
@@ -169,7 +200,6 @@ public class Grid
 			}
 		}
 	}
-    // I made it all one method so it will stay here!
 	/**
 	 *  Calculates the next state for the automata in graceful style.
 	 */
@@ -188,11 +218,11 @@ public class Grid
                             x + i >= tiles.length || 
                             y + j >= tiles[x].length)
                         {
-                            neighbors[3 * i + j + 4] = null;
+                            neighbors[3 * j + i + 4] = null;
                         }
                         else
                         {
-                            neighbors[3 * i + j + 4] =
+                            neighbors[3 * j + i + 4] =
                                 tiles[x + i][y + j];
                         }
 					}

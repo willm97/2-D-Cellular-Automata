@@ -1,26 +1,30 @@
+Update March 3 2019
+
+
+
+Update March 1 2019
+I've introduced an Automata and AutomataLoader class that have substantially improved the simulation. Additionally, I solved my problem of working at the edges of the simulation by making the Grid class make sense.
+
+Extensibility still isn't where I want it - I need at least three more classes going immediately forward. 
+
+- I want to make Control optionally read from a file. If supplied a command from initialization on the command line, it would read a list of commands from a file as a test harness instead of trying to manually type. Introducing a "wait <number of seconds>" command would go well with this option.
+
+- I want to make a class that stores picture profiles for different automata, and add a field for it to the Automata class. This saves having to physically deal with files and improves extensibility.
+
+- I want to make a class that stores default Grid states for different automata, and add a field for it to the Automata class. Then mucking around with how things look to begin with would be simplified.
+
+If these classes were added, the program would only require Automata loader to know rules and the physical class for a new rule to be written. Theoretically, Automata loader
+
+---
 I will use this plan as a loose guide for improving the project.
 
 My immediate goal is extensibility. I want to be able to have new automata added with a small class that defines their states and rules. (basically, the engine class with additional information about states). This isn't that hard in the scheme of how the program looks currently.
 
 In support of that, I have the following two aims:
 - Introduce an Automata class and apply it to the existing code. There are a few switch statements and catch-alls that show a need for a dictionary between types and information about them, which the Automata class can hold.
-- Rework the Control class, or replace it entirely, with a better parser, at Wade's suggestions.
+- Rework the Control class, or replace it entirely, with a better parser, at Wade's suggestions. This doesn't directly improve extensibility, but it would make testing easier. An extension of this would be the ability to parse files as test rigs.
 
 After that, it might be cool to try and implement all 2-D automata on two states based on their enumeration, which I believe is a standard somewhere. And then maybe just clean up the code by improving encapsulation.
 
 Anything else would be a long-term goal: interactivity, infinite grids, RLE files for saving, etc.
-
-Here's a Wolfram paper about 2-D automata that might be useful for some purpose, like using enumerations. It at least mentions them.
-https://www.stephenwolfram.com/publications/cellular-automata-complexity/pdfs/two-dimensional-cellular-automata.pdf
-
-I'll implement rule 736 here soon I think - it's a variant of life (224?) and may be high life.
-rule 224 - Conway's Game of Life
-0 1 2 3 4 5 6 7 8 9 a b c d e f g h
-0 0 0 0 0 1 1 1 0 0 0 0 0 0 0 0 0 0
-
-Totalistic rule - even bits are for dead cells, odd bits for live cells, and the count increases with the number of bits. Probably not how I would have done it (I would have just reversed the order) but it seems legit enough.
-So rule 736 is 
-0 1 2 3 4 5 6 7 8 9 a b c d e f g h
-0 0 0 0 0 1 1 1 0 1 0 0 0 0 0 0 0 0
-
-Which means it's life, but it keeps a cell alive if it has four neighbors and is alive
+---
