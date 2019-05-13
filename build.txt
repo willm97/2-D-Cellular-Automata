@@ -1,0 +1,2 @@
+javac -g -d classes -sourcepath sources/cellular/*.java 
+jar cfm classes/Cells.jar classes/Control.mf
