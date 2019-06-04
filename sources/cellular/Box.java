@@ -21,6 +21,7 @@ public class Box
 	private int height;
     private final int windowX;
     private final int windowY;
+    private final long waitTime;
     // The WINDOW_MARGIN is the height of the window above the content.
     private static final int WINDOW_MARGIN = 22;
 	/**
@@ -33,7 +34,6 @@ public class Box
 		this.type = type;
 		this.width = width;
 		this.height = height;
-		this.waitTime = waitTime;
         if (place == null)
         {
             this.place = new Grid(width, height, type);
@@ -55,6 +55,7 @@ public class Box
         this.windowX = type.getCellDim() * width;
         this.windowY = type.getCellDim() * height + WINDOW_MARGIN;
 		view.setSize(windowX, windowY);
+		this.waitTime = waitTime;
 	}
 	/**
 	 *  Returns the Grid controlled by this Box.
@@ -70,7 +71,7 @@ public class Box
      *  distinct reference to place than this class, in a different
      *  thread!
 	 */
-	public void tick(int waitTime)
+	public void tick(long waitTime)
 	{
 		place.tick();
 		view.repaint(waitTime, 0, 0, windowX, windowY);
@@ -90,13 +91,14 @@ public class Box
 	{
 		for (int i = 0; i < gens; i++)
 		{
-			this.tick();
+			this.tick(waitTime);
 		}
 	}
 	/**
-	 *  Returns the PictureWindow extends JPanel under this Box.
+	 *  Returns the JPanel under this Box.
+	 *  It is currently a DrawWindow.
 	 */
-	public PictureWindow getDisplayWindow()
+	public JPanel getDisplayWindow()
 	{
 		return disp;
 	}
