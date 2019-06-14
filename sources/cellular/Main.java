@@ -4,7 +4,6 @@ public class Main
 {
 	public static void main(String[] args)
 	{
-        System.out.println("Got through main.");
         Control.main(new String[0]);
         /*
 		if (args[0].equals("run"))

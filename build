@@ -1,0 +1,4 @@
+cd sources 
+javac -d ../classes cellular/*.java 
+cd ../classes 
+jar cfm Cells.jar Control.mf cellular/Main.class cellular/*.class resources text 

@@ -95,7 +95,7 @@ public class Grid
             // One dot for simple evolution
             // tiles[midX][midY].setState(1);
             /*  */
-            // randomize a central area
+            // Randomize a central area
             Random rand = new Random(System.currentTimeMillis());
             for (int i = -2; i < 3; i++)
             {
@@ -169,7 +169,7 @@ public class Grid
     /**
      *  Creates an engine based on the automata.
      *  TODO break up the case statements somehow... maybe classes
-     *  aren't my goto after all? But how else to show logic?
+     *  aren't my best way to encapsulate. But how else to show logic?
      */ 
 	public Engine createEngine(Automata type)
 	{
