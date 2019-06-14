@@ -1,17 +1,20 @@
-Welcome to the graphical cellular automata interface!
+Welcome to the cellular automata terminal interface.
 ————
 These are some usable commands:
 
 createProgram <programName> <automata>
-createBox <programName> <gridName> <cellsX> <cellsY>
+createBox <programName> <boxName> <cellsX> <cellsY>
 run <programName> <boxName> <numberOfTicks>
 save <programName> <boxName>
-load <programName> <gridName>
+load <programName> <boxName>
 exit
 
 ————
 These commands are in development:
 
-Nothing in development atm
+welcome (displays this message)
+help (massive page about possible automata, basically docs)
 ————
-Please choose a command now:
+If you are unsure what to do, try typing the commands in order. "programs" are held within "boxes", so make sure to run both create commands first
+
+Please specify a command now.
