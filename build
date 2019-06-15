@@ -1,4 +1,4 @@
 cd sources 
-javac -d ../classes cellular/*.java 
+javac -d ../classes -cp ./ cellular/*.java cellular2/*.java
 cd ../classes 
-jar cfm Cells.jar Control.mf cellular/Main.class cellular/*.class resources text 
+jar cfm Cells.jar Control.mf cellular/Main.class cellular/*.class cellular2/*.class resources text 
